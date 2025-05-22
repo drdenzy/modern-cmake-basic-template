@@ -13,11 +13,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(EXECUTABLE_NAME Executable)
 set(LIBRARY_NAME Library)
 
-# add first dependency
+option(COMPILE_EXECUTABLE "Indicates whether to compile the executable or not" OFF)
+
+
+add_subdirectory(cmake)
+
 add_subdirectory(src)
 
-# add second dependency
 add_subdirectory(inc)
 
-# add target
-add_subdirectory(app)
+if (COMPILE_EXECUTABLE)
+    add_subdirectory(app)
+else()
+    message("compilation will omit the executable")
+endif()
