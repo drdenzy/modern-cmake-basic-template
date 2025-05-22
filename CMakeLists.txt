@@ -6,12 +6,18 @@ project(
     LANGUAGES C CXX
 )
 
-# add_library(Library STATIC src/my_lib.cc)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# add_executable(Executable app/main.cc)
+set(EXECUTABLE_NAME Executable)
+set(LIBRARY_NAME Library)
 
-# target_link_libraries(Executable PUBLIC Library)
-
-# Tell cmake where to find subdirectories
+# add first dependency
 add_subdirectory(src)
+
+# add second dependency
+add_subdirectory(inc)
+
+# add target
 add_subdirectory(app)
