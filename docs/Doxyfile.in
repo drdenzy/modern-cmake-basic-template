@@ -1,0 +1,113 @@
+#---------------------------------------------------------------------------
+# Project Identification
+#---------------------------------------------------------------------------
+PROJECT_NAME = @PROJECT_NAME@
+PROJECT_NUMBER = @PROJECT_VERSION@
+PROJECT_BRIEF = "cmake template for C++ projects"
+PROJECT_LOGO =
+OUTPUT_DIRECTORY = @CMAKE_SOURCE_DIR@/docs
+CREATE_SUBDIRS = NO
+OUTPUT_LANGUAGE         = English
+MARKDOWN_SUPPORT        = YES
+
+#---------------------------------------------------------------------------
+# Build Configuration
+#---------------------------------------------------------------------------
+EXTRACT_ALL = YES     # Enforce explicit documentation
+EXTRACT_PRIVATE = YES # Internal documentation
+EXTRACT_STATIC = YES
+EXTRACT_LOCAL_METHODS = YES
+HIDE_UNDOC_MEMBERS = YES
+HIDE_UNDOC_CLASSES = YES
+WARN_AS_ERROR = YES # Strict CI/CD compliance
+
+#---------------------------------------------------------------------------
+# Input Configuration
+#---------------------------------------------------------------------------
+INPUT = @CMAKE_SOURCE_DIR@/src @CMAKE_SOURCE_DIR@/inc @CMAKE_SOURCE_DIR@/app
+RECURSIVE = YES
+EXAMPLE_PATH =
+EXCLUDE_PATTERNS = */tests/* */build/* */third_party/* */cmake-build*
+EXCLUDE_SYMLINKS = YES
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.c \
+                         *.cc \
+                         *.cpp \
+                         *.c++ \
+                         *.h \
+                         *.hpp \
+                         *.h++ \
+                         *.md \
+                         *.dox \
+                         *.doc \
+                         *.txt
+
+#---------------------------------------------------------------------------
+# Output Configuration
+#---------------------------------------------------------------------------
+GENERATE_HTML = YES
+GENERATE_LATEX = NO # Disable unless PDF needed
+HTML_OUTPUT = html
+HTML_FILE_EXTENSION   = .html
+HTML_COLORSTYLE_HUE   = 220
+HTML_TIMESTAMP        = NO
+HTML_EXTRA_STYLESHEET =
+GENERATE_TREEVIEW = YES # Better navigation
+DISABLE_INDEX = NO
+SEARCHENGINE = YES
+SERVER_BASED_SEARCH = NO # Security: disable external search
+
+#---------------------------------------------------------------------------
+# Source Browser
+#---------------------------------------------------------------------------
+SOURCE_BROWSER = YES
+INLINE_SOURCES = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION = YES
+
+#---------------------------------------------------------------------------
+# Diagram Configuration (requires Graphviz)
+#---------------------------------------------------------------------------
+HAVE_DOT = YES
+CLASS_GRAPH = YES
+COLLABORATION_GRAPH = YES
+CALL_GRAPH = YES
+CALLER_GRAPH = YES
+DOT_IMAGE_FORMAT =
+DOT_TRANSPARENT = NO
+INCLUDE_GRAPH = YES
+
+#---------------------------------------------------------------------------
+# Optimization
+#---------------------------------------------------------------------------
+ALPHABETICAL_INDEX = YES
+FULL_PATH_NAMES = YES
+STRIP_FROM_PATH = ./
+STRIP_FROM_INC_PATH = ./
+
+#---------------------------------------------------------------------------
+# Security
+#---------------------------------------------------------------------------
+GENERATE_DOCSET = NO # Disable Xcode docsets
+SHOW_FILES = YES
+SHOW_NAMESPACES = YES
+XML_OUTPUT = ./xml # For CI/CD integration
+
+#---------------------------------------------------------------------------
+# Advanced
+#---------------------------------------------------------------------------
+CLANG_ASSISTED_PARSING = NO # Improved C++ parsing
+SIP_SUPPORT = NO
+AUTOLINK_SUPPORT = YES
+TOC_INCLUDE_HEADINGS =
+MARKDOWN_SUPPORT = YES
+
+#---------------------------------------------------------------------------
+# Warning Configuration
+#---------------------------------------------------------------------------
+QUIET = NO
+WARNINGS = YES
+WARN_IF_UNDOCUMENTED = YES
+WARN_IF_DOC_ERROR = YES
+WARN_NO_PARAMDOC = YES
+

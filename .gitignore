@@ -1049,3 +1049,5 @@ dkms.conf
 
 # temporarily exclude external/json
 external/json
+docs/html
+docs/Doxyfile
