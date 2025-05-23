@@ -15,8 +15,14 @@ set(LIBRARY_NAME Library)
 
 option(COMPILE_EXECUTABLE "Indicates whether to compile the executable or not" OFF)
 
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
+include(AddGitSubmodule)
+add_git_submodule(external/json)
+
 
 add_subdirectory(cmake)
+
+add_subdirectory(external)
 
 add_subdirectory(src)
 

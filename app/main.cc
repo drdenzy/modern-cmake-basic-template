@@ -1,4 +1,5 @@
 #include <iostream>
+#include <nlohmann/json.hpp>
 
 #include "my_lib.h"
 #include "config.hpp"
@@ -9,7 +10,13 @@ int main(){
             << "Version: " << project_version << "\n";
     std::cout << '\n';
 
+    std::cout << "JSON Lib Version: "
+    << NLOHMANN_JSON_VERSION_MAJOR << "."
+    << NLOHMANN_JSON_VERSION_MINOR << "."
+    << NLOHMANN_JSON_VERSION_PATCH << "\n";
 
+  std::cout << '\n';
+  
     int x = 10;
     int y = 3;
 

@@ -1046,3 +1046,6 @@ dkms.conf
 
 # .vscode
 .vscode
+
+# temporarily exclude external/json
+external/json
