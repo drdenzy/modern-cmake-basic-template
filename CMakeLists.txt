@@ -16,6 +16,19 @@ set(LIBRARY_NAME Library)
 
 option(COMPILE_EXECUTABLE "Indicates whether to compile the executable or not" OFF)
 
+option(ENABLE_TESTING "Enable unit testing build" ON)
+option(ENABLE_WARNINGS "Enable warnings during compilation" ON)
+option(ENABLE_WARNINGS_AS_ERRORS "Enable warnings as errors during compilation" OFF)
+
+
+option(ENABLE_ADDRESS_SANITIZER "Enable Address Sanitizer" ON)
+option(ENABLE_UNDEFINED_SANITIZER "Enable Undefined Behavior Sanitizer" ON)
+option(ENABLE_THREAD_SANITIZER "Enable Thread Sanitizer in cases of data races" OFF)
+
+# option(ENABLE_MEMORY_SANITIZER "Enable Memory Sanitizer" OFF)
+# option(ENABLE_LEAK_SANITIZER "Enable Leak Sanitizer" OFF)
+
+option(ENABLE_LTO "Enable LTO (Link Time Optimization) / IPO (Interprocedural Optimization)" ON)
 
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
@@ -23,6 +36,39 @@ include(AddGitSubmodule)
 include(FetchContent)
 # include(Docs)
 
+if (ENABLE_WARNINGS)
+    message(STATUS "Warnings enabled")
+    include(Warnings)
+else()
+    message(STATUS "Warnings disabled")
+endif()
+
+# if (ENABLE_WARNINGS_AS_ERRORS)
+#     message(STATUS "Warnings as errors enabled")
+# else()
+#     message(STATUS "Warnings as errors disabled")
+# endif()
+
+if (ENABLE_ADDRESS_SANITIZER OR ENABLE_UNDEFINED_SANITIZER)
+    message(STATUS "Address Sanitizer enabled")
+    include(Sanitizers)
+    add_sanitizer_flags(ENABLE_ADDRESS_SANITIZER ENABLE_UNDEFINED_SANITIZER)
+else()
+    message(STATUS "Address Sanitizer disabled")
+endif()
+
+if (ENABLE_THREAD_SANITIZER)
+    message(STATUS "Thread Sanitizer enabled")
+    include(Sanitizers)
+    add_sanitizer_flags(ENABLE_THREAD_SANITIZER)
+else()
+    message(STATUS "Thread Sanitizer disabled")
+endif()
+
+if (ENABLE_LTO)
+    message(STATUS "Link Time Optimization enabled")
+    include(LTO)
+endif()
 
 # Enable documentation in all builds
 option(BUILD_DOCS "Build documentation" ON)
