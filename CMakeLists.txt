@@ -62,13 +62,17 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(cxxopts)
 
-FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2
-  GIT_TAG v3.8.1
-  GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(Catch2)
+if (ENABLE_TESTING)
+    FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2
+    GIT_TAG v3.8.1
+    GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(Catch2)
+    list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
+
+endif()
 
 add_subdirectory(cmake)
 
@@ -84,3 +88,9 @@ else()
     message("compilation will omit the executable")
 endif()
 
+
+if(ENABLE_TESTING)
+    include(CTest)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
