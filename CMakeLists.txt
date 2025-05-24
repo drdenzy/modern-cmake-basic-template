@@ -31,6 +31,9 @@ option(ENABLE_THREAD_SANITIZER "Enable Thread Sanitizer in cases of data races" 
 option(ENABLE_LTO "Enable LTO (Link Time Optimization) / IPO (Interprocedural Optimization)" ON)
 
 
+option(USE_CPM "Add CPM (C++ Package Manager) support" ON)
+
+
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 include(AddGitSubmodule)
 include(FetchContent)
@@ -76,38 +79,51 @@ if(BUILD_DOCS)
     include(Docs)
 endif()
 
-FetchContent_Declare(
-  nlohmann_json
-  GIT_REPOSITORY https://github.com/nlohmann/json
-  GIT_TAG v3.12.0
-  GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(nlohmann_json)
+if (USE_CPM)
+    message(STATUS "Using CPM (C++ Package Manager) for dependency management")
+    include(CPM)
+    CPMAddPackage("gh:nlohmann/json@3.12.0")
+    CPMAddPackage("gh:fmtlib/fmt#11.2.0")
+    CPMAddPackage("gh:gabime/spdlog@1.15.3")
+    CPMAddPackage("gh:jarro2783/cxxopts@3.2.1")
+    CPMAddPackage("gh:catchorg/Catch2@3.8.1")
+else()
+    message(STATUS "Using the builtin cmake FetchContent for dependency management")
+    FetchContent_Declare(
+    nlohmann_json
+    GIT_REPOSITORY https://github.com/nlohmann/json
+    GIT_TAG v3.12.0
+    GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(nlohmann_json)
 
-FetchContent_Declare(
-  fmt
-  GIT_REPOSITORY https://github.com/fmtlib/fmt
-  GIT_TAG 11.2.0
-  GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(fmt)
+    FetchContent_Declare(
+    fmt
+    GIT_REPOSITORY https://github.com/fmtlib/fmt
+    GIT_TAG 11.2.0
+    GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(fmt)
 
-FetchContent_Declare(
-  spdlog
-  GIT_REPOSITORY https://github.com/gabime/spdlog
-  GIT_TAG v1.15.3
-  GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(spdlog)
+    FetchContent_Declare(
+    spdlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog
+    GIT_TAG v1.15.3
+    GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(spdlog)
 
-FetchContent_Declare(
-  cxxopts
-  GIT_REPOSITORY https://github.com/jarro2783/cxxopts
-  GIT_TAG v3.2.1
-  GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(cxxopts)
+    FetchContent_Declare(
+    cxxopts
+    GIT_REPOSITORY https://github.com/jarro2783/cxxopts
+    GIT_TAG v3.2.1
+    GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(cxxopts)
 
+endif()
+
+# Enable testing if requested
 if (ENABLE_TESTING)
     FetchContent_Declare(
     Catch2
