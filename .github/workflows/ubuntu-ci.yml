@@ -18,7 +18,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get install -y ninja-build && pip install -U gcovr
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build doxygen && pip install -U gcovr
 
       - name: Configure
         run: cmake --preset ${{ matrix.preset }}
