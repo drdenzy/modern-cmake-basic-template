@@ -14,7 +14,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(EXECUTABLE_NAME Executable)
 set(LIBRARY_NAME Library)
 
-option(COMPILE_EXECUTABLE "Indicates whether to compile the executable or not" OFF)
+option(COMPILE_EXECUTABLE "Indicates whether to compile the executable or not" ON)
 
 option(ENABLE_TESTING "Enable unit testing build" ON)
 option(ENABLE_WARNINGS "Enable warnings during compilation" ON)
@@ -86,7 +86,11 @@ if (USE_CPM)
     CPMAddPackage("gh:fmtlib/fmt#11.2.0")
     CPMAddPackage("gh:gabime/spdlog@1.15.3")
     CPMAddPackage("gh:jarro2783/cxxopts@3.2.1")
-    CPMAddPackage("gh:catchorg/Catch2@3.8.1")
+    # CPMAddPackage("gh:catchorg/Catch2@3.8.1")
+    if(ENABLE_TESTING)
+        cpmaddpackage("gh:catchorg/Catch2@3.8.1")
+        list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
+    endif()
 else()
     message(STATUS "Using the builtin cmake FetchContent for dependency management")
     FetchContent_Declare(
@@ -120,21 +124,22 @@ else()
     GIT_SHALLOW TRUE
     )
     FetchContent_MakeAvailable(cxxopts)
+    # Enable testing if requested
+    if (ENABLE_TESTING)
+        FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2
+        GIT_TAG v3.8.1
+        GIT_SHALLOW TRUE
+        )
+        FetchContent_MakeAvailable(Catch2)
+        list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
+
+    endif()
 
 endif()
 
-# Enable testing if requested
-if (ENABLE_TESTING)
-    FetchContent_Declare(
-    Catch2
-    GIT_REPOSITORY https://github.com/catchorg/Catch2
-    GIT_TAG v3.8.1
-    GIT_SHALLOW TRUE
-    )
-    FetchContent_MakeAvailable(Catch2)
-    list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
 
-endif()
 
 add_subdirectory(cmake)
 

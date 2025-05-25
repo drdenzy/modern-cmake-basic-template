@@ -1049,5 +1049,6 @@ dkms.conf
 
 # temporarily exclude external/json
 external/json
+external/vcpkg
 docs/html
 docs/Doxyfile
