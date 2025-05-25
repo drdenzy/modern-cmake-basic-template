@@ -11,17 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
       with:
         persist-credentials: true
-
-    - name: Authenticate with GitHub
-      run: git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+
+    - name: Configure GitHub credentials for pre-commit hook fetches
+      run: |
+        git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
     - name: Cache pre-commit environment
       uses: actions/cache@v4
@@ -31,5 +33,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pre-commit-
 
-    - name: Run pre-commit
+    - name: Run pre-commit checks
       uses: pre-commit/action@v3.0.0
+
+    - name: Dump pre-commit log on failure
+      if: failure()
+      run: cat ~/.cache/pre-commit/pre-commit.log || true
