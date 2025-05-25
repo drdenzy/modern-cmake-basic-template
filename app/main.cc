@@ -8,18 +8,21 @@
 #include "config.hpp"
 #include "my_lib.h"
 
-int main() {
+int main()
+{
     int unused; // This variable is used to avoid unused variable warnings.
 
     int arr[3];
-    arr[3] = 100; // This line is intentionally incorrect to demonstrate the use of sanitizers to detect out-of-bounds access bug.
+    arr[3] =
+        100; // This line is intentionally incorrect to demonstrate the use of sanitizers to detect out-of-bounds access bug.
 
     std::cout << "Project Name: " << project_name << "\n"
               << "Version: " << project_version << "\n";
     std::cout << '\n';
 
     std::cout << "JSON Lib Version: " << NLOHMANN_JSON_VERSION_MAJOR << "."
-              << NLOHMANN_JSON_VERSION_MINOR << "." << NLOHMANN_JSON_VERSION_PATCH << "\n";
+              << NLOHMANN_JSON_VERSION_MINOR << "."
+              << NLOHMANN_JSON_VERSION_PATCH << "\n";
 
     std::cout << '\n';
 
@@ -27,13 +30,14 @@ int main() {
 
     std::cout << '\n';
 
-    std::cout << "CXXOPTS Lib Version: " << CXXOPTS__VERSION_MAJOR << "." << CXXOPTS__VERSION_MINOR
-              << "." << CXXOPTS__VERSION_PATCH << "\n";
+    std::cout << "CXXOPTS Lib Version: " << CXXOPTS__VERSION_MAJOR << "."
+              << CXXOPTS__VERSION_MINOR << "." << CXXOPTS__VERSION_PATCH
+              << "\n";
 
     std::cout << '\n';
 
-    std::cout << "SPDLOG Lib Version: " << SPDLOG_VER_MAJOR << "." << SPDLOG_VER_MINOR << "."
-              << SPDLOG_VER_PATCH << "\n";
+    std::cout << "SPDLOG Lib Version: " << SPDLOG_VER_MAJOR << "."
+              << SPDLOG_VER_MINOR << "." << SPDLOG_VER_PATCH << "\n";
 
     std::cout << '\n';
 
@@ -60,10 +64,14 @@ int main() {
     std::cin >> countyTaxRate;
 
     double totalTax = computeTax(totalIncome, stateTaxRate, countyTaxRate);
-    fmt::print(
-        "your total monthly income: {} \n state tax rate: {} \n county tax rate: {} \n Total Tax: "
-        "{} \n Net income: {} \n",
-        totalIncome, stateTaxRate, countyTaxRate, totalTax, totalIncome - totalTax);
+    fmt::print("your total monthly income: {} \n state tax rate: {} \n county "
+               "tax rate: {} \n Total Tax: "
+               "{} \n Net income: {} \n",
+               totalIncome,
+               stateTaxRate,
+               countyTaxRate,
+               totalTax,
+               totalIncome - totalTax);
 
     return 0;
 }

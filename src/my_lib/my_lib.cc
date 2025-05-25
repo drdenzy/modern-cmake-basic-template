@@ -9,7 +9,8 @@
  * @param y The second integer.
  * @return int The modulus of x and y.
  */
-int modCompute(int x, int y) {
+int modCompute(int x, int y)
+{
     return x % y;
 }
 
@@ -21,7 +22,8 @@ int modCompute(int x, int y) {
  * @param countyTaxRate The county tax rate.
  * @return double The total tax amount.
  */
-double computeTax(double income, double stateTaxRate, double countyTaxRate) {
+double computeTax(double income, double stateTaxRate, double countyTaxRate)
+{
     double stateTax = income * stateTaxRate;
     double countyTax = income * countyTaxRate;
     double totalTax = stateTax + countyTax;
@@ -36,7 +38,8 @@ double computeTax(double income, double stateTaxRate, double countyTaxRate) {
  * @param decimalPlaces The number of decimal places to round to.
  * @return double The rounded value.
  */
-double roundToDecimalPlaces(double value, int decimalPlaces) {
+double roundToDecimalPlaces(double value, int decimalPlaces)
+{
     double factor = std::pow(10.0, decimalPlaces);
     return std::round(value * factor) / factor;
 }
