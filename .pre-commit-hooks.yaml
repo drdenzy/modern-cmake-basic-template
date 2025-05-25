@@ -1,0 +1,9 @@
+# .pre-commit-hooks.yaml
+- id: clang-tidy
+  name: clang-tidy
+  entry: clang-tidy
+  language: system
+  types: [c, c++]
+  files: \.(h|hpp|c|cpp|cc|cxx)$
+  exclude: ^(build/|external/|third_party/)
+  description: Run clang-tidy on C/C++ files
