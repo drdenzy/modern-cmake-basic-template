@@ -26,8 +26,8 @@ option(COMPILE_EXECUTABLE "Indicates whether to compile the executable or not" O
 option(BUILD_DOCS "Build documentation" ON)
 
 # Options for unit testing and code coverage
-option(ENABLE_TESTING "Enable unit testing build" OFF)
-option(ENABLE_COVERAGE "Enable code coverage build" OFF)
+option(ENABLE_TESTING "Enable unit testing build" ON)
+option(ENABLE_COVERAGE "Enable code coverage build" ON)
 
 # Options for code quality tools
 option(ENABLE_CLANG_TIDY "Enable clang-tidy checks" ON)
