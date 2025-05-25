@@ -20,13 +20,32 @@ if(BUILD_DOCS)
 endif()
 
 if (ENABLE_WARNINGS)
-    target_set_warnings(${LIBRARY_NAME} ON OFF)
+    # target_set_warnings(${LIBRARY_NAME} ON OFF)
+        target_set_warnings(
+        TARGET
+        ${LIBRARY_NAME}
+        ENABLE
+        ${ENABLE_WARNINGS}
+        AS_ERRORS
+        ${ENABLE_WARNINGS_AS_ERRORS})
 else()
     message(STATUS "Warnings disabled for: ${LIBRARY_NAME}")
 endif()
 
 if (ENABLE_LTO)
-    target_enable_lto(${LIBRARY_NAME} ${ENABLE_LTO})
+    # target_enable_lto(${LIBRARY_NAME} ${ENABLE_LTO})
+        target_enable_lto(
+        TARGET
+        ${LIBRARY_NAME}
+        ENABLE
+        ON)
 else()
     message(STATUS "LTO disabled for: ${LIBRARY_NAME}")
 endif()
+
+
+
+if(${ENABLE_CLANG_TIDY})
+    add_clang_tidy_to_target(${LIBRARY_NAME})
+endif()
+

@@ -9,10 +9,10 @@
 #include "my_lib.h"
 
 int main() {
-    // int unused; // This variable is used to avoid unused variable warnings.
+    int unused; // This variable is used to avoid unused variable warnings.
 
-    // int arr[3];
-    // arr[3] = 100; // This line is intentionally incorrect to demonstrate the use of sanitizers to detect out-of-bounds access bug.
+    int arr[3];
+    arr[3] = 100; // This line is intentionally incorrect to demonstrate the use of sanitizers to detect out-of-bounds access bug.
 
     std::cout << "Project Name: " << project_name << "\n"
               << "Version: " << project_version << "\n";

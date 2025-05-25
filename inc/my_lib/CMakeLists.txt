@@ -13,3 +13,8 @@ target_link_libraries(${LIBRARY_NAME} PUBLIC
     spdlog::spdlog
     cxxopts::cxxopts
 )
+
+
+if (${ENABLE_CLANG_TIDY})
+    add_clang_tidy_to_target(${LIBRARY_NAME})
+endif()
