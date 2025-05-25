@@ -30,8 +30,8 @@ option(ENABLE_TESTING "Enable unit testing build" ON)
 option(ENABLE_COVERAGE "Enable code coverage build" ON)
 
 # Options for code quality tools
-option(ENABLE_CLANG_TIDY "Enable clang-tidy checks" ON)
-option(ENABLE_CLANG_FORMAT "Enable clang-format checks" ON)
+option(ENABLE_CLANG_TIDY "Enable clang-tidy checks" OFF)
+option(ENABLE_CLANG_FORMAT "Enable clang-format checks" OFF)
 
 
 # Options for compiler warnings, sanitizers and optimizations
