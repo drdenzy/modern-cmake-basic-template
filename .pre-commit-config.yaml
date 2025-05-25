@@ -15,7 +15,7 @@ repos:
   hooks:
     - id: clang-format
       exclude_types: [javascript, json]
-      files: \.(h|hpp|c|cpp|cc|cxx)$
+      files: \.(h|hpp|c|c++|cc|cxx)$
       exclude: ^(build/|external/|third_party/)
 
 - repo: https://github.com/cheshirekow/cmake-format
@@ -30,6 +30,6 @@ repos:
       name: clang-tidy
       entry: clang-tidy
       language: system
-      types: [c, cpp]
+      types: [c, c++]
       files: \.(h|hpp|c|cpp|cc|cxx)$
       exclude: ^(build/|external/|third_party/)
